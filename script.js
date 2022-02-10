@@ -3,18 +3,21 @@
 let score = 20;
 let highScore = 0;
 let secretNumber = Math.trunc(Math.random() * 20 + 1);
-// document.querySelector('.number').textContent = secretNumber;
+
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
 
   // No input
   if (!guess) {
-    document.querySelector('.message').textContent = `⛔ No number!`;
+    displayMessage(`⛔ No number!`);
 
     // Player wins
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = `🥳 Corrent number!`;
+    displayMessage(`🥳 Corrent number!`);
 
     document.querySelector('.number').textContent = secretNumber;
 
@@ -28,24 +31,14 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highScore;
     }
 
-    // Guess is too high
-  } else if (guess > secretNumber) {
+    // Guess is not correct
+  } else if (guess !== secretNumber) {
     if (score > 1) {
       document.querySelector('.score').textContent = --score;
-      document.querySelector('.message').textContent = '📈 Too high!';
+      displayMessage(guess > secretNumber ? '📈 Too high!' : `📉 Too low!`);
     } else {
       document.querySelector('.score').textContent = 0;
-      document.querySelector('.message').textContent = `💥 You lost the game!`;
-    }
-
-    //Guess is too low
-  } else {
-    if (score > 1) {
-      document.querySelector('.score').textContent = --score;
-      document.querySelector('.message').textContent = '📉 Too low!';
-    } else {
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('.message').textContent = `💥 You lost the game!`;
+      displayMessage(`💥 You lost the game!`);
     }
   }
 });
@@ -60,7 +53,7 @@ document.querySelector('.again').addEventListener('click', function () {
   secretNumber = Math.trunc(Math.random() * 20 + 1);
 
   // Resetting Display
-  document.querySelector('.message').textContent = `Start guessing...`;
+  displayMessage(`Start guessing...`);
   document.querySelector('.number').textContent = `?`;
   document.querySelector('.guess').value = '';
 
