@@ -15,7 +15,9 @@ document.querySelector('.check').addEventListener('click', function () {
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = `🥳 Corrent number!`;
 
-    document.querySelector('body').style.backgroundColor;
+    document.querySelector('body').style.backgroundColor = `#51cf66`;
+
+    document.querySelector('.number').style.width = `30rem`;
 
     // Guess is too high
   } else if (guess > secretNumber) {
