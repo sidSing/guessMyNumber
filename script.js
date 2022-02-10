@@ -4,6 +4,23 @@ let score = 20;
 const secretNumber = Math.trunc(Math.random() * 20 + 1);
 // document.querySelector('.number').textContent = secretNumber;
 
+// Again Button
+document.querySelector('.again').addEventListener('click', function () {
+  // Resetting Score
+  score = 20;
+  document.querySelector('.score').textContent = score;
+
+  // Generating new secretNumber
+  secretNumber = Math.trunc(Math.random() * 20 + 1);
+
+  // Resetting Display
+  document.querySelector('.message').textContent = `Start guessing...`;
+
+  //Background Colour and width
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.score').style.width = '15rem';
+});
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
 
@@ -14,6 +31,8 @@ document.querySelector('.check').addEventListener('click', function () {
     // Player wins
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = `🥳 Corrent number!`;
+
+    document.querySelector('.number').textContent = secretNumber;
 
     document.querySelector('body').style.backgroundColor = `#51cf66`;
 
